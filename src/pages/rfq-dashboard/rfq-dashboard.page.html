@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button menuToggle ion-button icon-only>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{rfq_title}}</ion-title>
+    </ion-navbar>
+    <ion-toolbar color="secondary">
+        <ion-title>RFQ Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngIf="!rfqs">
+        <ion-card-header class="my-teams-header">
+            No Recent RFQs
+        </ion-card-header>
+        <ion-card-content>
+            <p>You don't have any recent viewed RFQs yet.</p>
+            <p>to follow more teams, select a tournament, then you can follow teams from their team page.</p>
+            <button full (click)="goToRFQs()" ion-button icon-left>
+                <ion-icon name="search"></ion-icon>
+                FIND A RFQ
+            </button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card  *ngFor="let rfq of rfqs" (click)="itemTapped($event, rfq)">
+        <ion-card-header color="link">
+         <ion-icon name="star"></ion-icon> {{rfq.Rfq_Nbr}} | {{rfq.ProjectNbr}}
+        </ion-card-header>
+        <ion-card-content color="primary">
+            {{rfq.ProjectNbr}} | {{rfq.QuoteNbr}} | {{rfq.RFQ_Created_By}} | {{rfq.RFQ_Updated_By}}            
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="rfqs">
+        <ion-card-content>            
+            <button full (click)="goToRFQs()" ion-button icon-left>
+                <ion-icon name="search"></ion-icon>
+                Find A RFQ
+            </button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content>
+            <p>Other options.</p>
+            <button full (click)="createRFQ()" ion-button icon-left>
+                <ion-icon name="md-add"></ion-icon>
+                Create RFQ
+            </button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

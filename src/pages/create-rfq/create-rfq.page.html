@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Create RFQ</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goHome()">
+                <ion-icon name="home"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label floating>RFQ No:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.Rfq_Nbr"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Project No:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.ProjectNbr"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Quote No:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.QuoteNbr"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Created By:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_Created_By"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Created Date:</ion-label>
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.RFQ_Date_Created"></ion-datetime>
+        </ion-item>
+           <ion-item>
+            <ion-label floating>SoldTo Cust Nbr:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_SoldTo_CustNbr"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>SoldTo Cust Seq:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_SoldTo_CustSeq"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Updated By:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_Updated_By"></ion-input>
+        </ion-item>
+         <ion-item>
+            <ion-label floating>Updated Date:</ion-label>
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.RFQ_Date_Updated"></ion-datetime>            
+        </ion-item>
+    </ion-list>
+    <button full (click)="createRfq()" ion-button icon-left>
+                <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+                Create RFQ
+    </button>
+</ion-content>

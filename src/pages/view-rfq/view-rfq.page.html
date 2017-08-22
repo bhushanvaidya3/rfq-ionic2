@@ -1,0 +1,111 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{headerText}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goHome()">
+                <ion-icon name="home"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center>
+    <!-- <button ion-item>
+        {{rfq.ProjectNbr}} | {{rfq.QuoteNbr}} | {{rfq.RFQ_SoldTo_CustSeq}}
+    </button>     -->
+    <ion-list>
+        <!-- <ion-item>
+            <ion-label >RFQ No:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.Rfq_Nbr"></ion-input>
+        </ion-item> -->
+        <ion-item>
+            <ion-label color="link">Project Name:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.ProjectNbr" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-spinner item-start name="circles" *ngIf="soldToSpinner"></ion-spinner>
+            <ion-label color="link">SoldTos:</ion-label>
+            <ion-select [(ngModel)]="selectedSoldTo" interface="popover" (ngModelChange)="onSoldToChange($event)">
+                <ion-option *ngFor="let soldTo of requiredSoldTos" [value]="soldTo.Cust_nbr" [selected]="soldTo.Cust_nbr == selectedSoldTo">{{soldTo.Name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-spinner item-start name="circles" *ngIf="countrySpinner"></ion-spinner>            
+            <ion-label color="link">Project Country:</ion-label>
+            <ion-select [(ngModel)]="selectedCountry" (ngModelChange)="onProjectCountryChange($event)" interface="popover">
+                <ion-option *ngFor="let country of countries" [value]="country.Country" [selected]="country.Country == selectedCountry">{{country.Country}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-spinner item-start name="circles" *ngIf="stateSpinner"></ion-spinner>                        
+            <ion-label color="link">Project State:</ion-label>
+            <ion-select [(ngModel)]="selectedProjectState" (ngModelChange)="onProjectStateChange($event)" interface="popover">
+                <ion-option *ngFor="let state of projectStates" [value]="state.StateCd" [selected]="state.StateCd == selectedProjectState">{{state.StateCd}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Origin State:</ion-label>
+            <ion-select [(ngModel)]="selectedOriginState" (ngModelChange)="onOriginStateChange($event)" interface="popover">
+                <ion-option *ngFor="let state of projectStates" [value]="state.StateCd" [selected]="state.StateCd == selectedOriginState">{{state.StateCd}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Quote No:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.QuoteNbr" readonly text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Contractor:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_Contractor" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Bid Date:</ion-label>
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.RFQ_BidDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Buy Date:</ion-label>
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.RFQ_BuyDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Created By:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_Created_By" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Created Date:</ion-label>
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.RFQ_Date_Created"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Updated By:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfq.RFQ_Updated_By" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Updated Date:</ion-label>RFQ_Date_Updated
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.RFQ_Date_Updated"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Expiry Date:</ion-label>RFQ_Date_Updated
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfq.dtExpiryDate"></ion-datetime>
+        </ion-item>
+    </ion-list>
+    <button full (click)="updateRFQHeader()" [disabled] = "checkUpdateStatus()"  ion-button icon-left>
+                <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+                Update RFQ
+    </button>
+    <button full (click)="updateRfqLineItem()" disabled ion-button icon-left>
+        <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+        Submit For Review
+    </button>
+
+    <button full (click)="createRfqLineItem()" [disabled] = "createNewLine" ion-button icon-left>
+        <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+        Create New Line
+    </button>
+
+    <ion-card *ngFor="let rfqLine of rfqItems" (click)="itemTapped($event, rfq, rfqLine)">
+        <ion-card-header color="link">
+            <ion-icon name="star"></ion-icon> Line Item: {{rfqLine.Dtl_Id}} | {{rfqLine.RFQ_Status}}
+        </ion-card-header>
+        <ion-card-content color="primary">
+            {{rfqLine.Product_Description}} | {{rfqLine.Unit_Price}} | {{rfqLine.Price_File_Name}} | {{rfq.RFQ_Updated_By}}
+        </ion-card-content>
+    </ion-card>
+</ion-content>

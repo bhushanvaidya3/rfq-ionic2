@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{headerText}}: {{rfqLineItem.id}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goHome()">
+                <ion-icon name="home"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label color="link">Line Nbr:</ion-label>
+            <ion-input type="text" disabled [(ngModel)]="rfqLineItem.Dtl_Id" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Product Nbr:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Product_Nbr" text-center></ion-input>
+            <button ion-button item-end color="primary" (click)="showProductSearch()">
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Description:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Product_Description" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Quantity:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.RFQ_Qty" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Status:</ion-label>
+            <ion-input type="text" readonly [(ngModel)]="rfqLineItem.RFQ_Status" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Unit Price:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Unit_Price" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Price List Price:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Price_List_Price" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Price File Name:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Price_File_Name" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Pricing UOM:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Pricing_UOM" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Selling UOM:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Selling_UOM" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Requested Date:</ion-label>
+            <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="rfqLineItem.Requested_Date"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Quote Comments:</ion-label>
+            <ion-input type="text" [(ngModel)]="rfqLineItem.Line_Quote_Comment" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Is Active:</ion-label>
+            <ion-toggle [(ngModel)]="rfqLineItem.Line_Status" color="link"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label color="link">Is Approved:</ion-label>
+            <ion-toggle [(ngModel)]="isApproved" color="link"></ion-toggle>
+        </ion-item>
+    </ion-list>
+    <button full (click)="ProcessRfqLineItem()" ion-button icon-left>
+                <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+                {{saveText}}
+    </button>    
+</ion-content>

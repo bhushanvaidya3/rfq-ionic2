@@ -1,14 +1,26 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="sidemenu-header">
+      <ion-title>SPSX RFQ</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content color="sidemenu">
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <ion-list-header>
+        Navigate
+      </ion-list-header>
+      <button menuClose ion-item (click)="goHome()">
+          RFQ Dashboard
+      </button>
+        <button menuClose ion-item (click)="goToRFQ('converted')">
+          Converted RFQs
+      </button>
+        <button menuClose ion-item (click)="goToRFQ('expired')">
+          Expired RFQs
+      </button>
+      <button menuClose ion-item (click)="goToRFQ('search')">
+          Find a RFQ
       </button>
     </ion-list>
   </ion-content>

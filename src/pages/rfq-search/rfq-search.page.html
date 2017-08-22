@@ -1,0 +1,28 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>{{rfq_title}}</ion-title>
+    </ion-navbar>
+
+    <ion-toolbar>
+        <ion-searchbar (ionInput)="getItems($event)" [(ngModel)]="queryText"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <!-- <button ion-item *ngFor="let rfq of rfqs" (click)="itemTapped($event, rfq)">
+        {{rfq.ProjectNbr}} | {{rfq.QuoteNbr}} | {{rfq.RFQ_SoldTo_CustSeq}}
+    </button>     -->
+    <ion-card *ngFor="let rfq of rfqs" (click)="itemTapped($event, rfq)">
+        <ion-card-header color="link">
+            RFQ: {{rfq.Rfq_Nbr}} | {{rfq.ProjectNbr}}
+        </ion-card-header>
+        <ion-card-content color="primary">
+            {{rfq.ProjectNbr}} | {{rfq.QuoteNbr}} | {{rfq.RFQ_Created_By}} | {{rfq.RFQ_Updated_By}}
+        </ion-card-content>
+    </ion-card>
+</ion-content>

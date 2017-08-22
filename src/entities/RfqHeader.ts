@@ -1,0 +1,36 @@
+export class RfqHeader {
+    Hdr_Id: string;
+    RFQ_Nbr: string;
+    RFQ_SoldTo_CustNbr: string;
+    RFQ_SoldTo_CustSeq: string;
+    RFQ_ShipTo_CustNbr: string;
+    RFQ_ShipTo_CustSeq: string;
+    RFQ_ShipTo_Name: string;
+    RFQ_ShipTo_Address: string;
+    RFQ_Zip: string;
+    RFQ_Date_Created: string;
+    RFQ_Created_By: string;
+    RFQ_Date_Updated: string;
+    RFQ_Updated_By: string;
+    ProjectNbr: string;
+    QuoteNbr: string;
+    QuoteNbrEnergy: string;
+    Status_Desc: string;
+    Status_Id: string;
+    Customer: string;
+    Rep_Firm_Name: string;
+    dtExpiryDate: string;
+    RFQ_ProjectStateApproved: string;
+    RFQ_ProjectState: string;
+    RFQ_OriginState: string;
+    RFQ_ProjectCountry: string;
+    RFQ_Contractor: string;
+    RFQ_BidDate: string;
+    RFQ_BuyDate: string;
+    AttnOverride: string;
+    Copper: string;
+    Aluminum: string;
+    RFQ_PriceTerms: string;
+    Creator_Role_Id: string;
+    RFQ_Quotes_Comments: string;
+}
